@@ -29,25 +29,31 @@ namespace DefaultCompany.Enemy
             if (Vector3.Distance(transform.position, targetPosition) >= 0.02f)
             {
                 Vector3 direction = (targetPosition - transform.position).normalized;
-                transform.position += speed * Time.deltaTime * direction;
+                Vector3 destination = transform.position + direction;
+                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                 transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             }
             else
             {
-                if (cooldownCounter >= attackCooldown)
-                {
-                    RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, TARGET_LAYERMASK))
-                    {
-                        if (hit.transform.TryGetComponent(out IDamageable damageable))
-                        {
-                            damageable.TakeDamage(power);
-                        }
-                    }
-                    cooldownCounter = 0f;
-                }
-                cooldownCounter += Time.deltaTime;
+                CheckAttackCondition();
             }
+        }
+
+        private void CheckAttackCondition()
+        {
+            if (cooldownCounter >= attackCooldown)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, TARGET_LAYERMASK))
+                {
+                    if (hit.transform.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(power);
+                    }
+                }
+                cooldownCounter = 0f;
+            }
+            cooldownCounter += Time.deltaTime;
         }
     }
 }
