@@ -7,9 +7,9 @@ namespace DefaultCompany.Player
     {
         private readonly IDamageable health;
 
-        private readonly GameObject view;
+        private readonly TowerView view;
 
-        public TowerController(IDamageable health, GameObject view)
+        public TowerController(IDamageable health, TowerView view)
         {
             this.health = health;
             this.view = view;
@@ -17,16 +17,28 @@ namespace DefaultCompany.Player
 
         public void Initialize()
         {
+            health.OnHealthChanged += HandleHealthChanged;
             health.OnDied += HandleDied;
+        }
+
+        private void HandleHealthChanged(int currentHealth, int _)
+        {
+            if (currentHealth > 0)
+            {
+                view.PlayPulseEffect();
+                view.PlayDamageSound();
+            }
         }
 
         private void HandleDied()
         {
-            view.SetActive(false);
+            view.Disable();
+            view.PlayDeathSound();
         }
 
         public void Dispose()
         {
+            health.OnHealthChanged -= HandleHealthChanged;
             health.OnDied -= HandleDied;
         }
     }

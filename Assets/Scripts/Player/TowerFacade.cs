@@ -23,8 +23,8 @@ namespace DefaultCompany.Player
         private void Awake()
         {
             Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            health = new Health(20);
-            controller = new(health, gameObject);
+            health = new Health(20, GetComponent<Collider>());
+            controller = new(health, GetComponent<TowerView>());
         }
 
         private void OnEnable()
