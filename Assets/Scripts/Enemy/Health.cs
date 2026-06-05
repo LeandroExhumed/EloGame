@@ -5,7 +5,7 @@ namespace DefaultCompany.Enemy
 {
     public class Health : IDamageable
     {
-        public event Action<int> OnHealthChanged;
+        public event Action<int, int> OnHealthChanged;
         public event Action OnDied;
 
         public int CurrentHealth
@@ -14,15 +14,17 @@ namespace DefaultCompany.Enemy
             set
             {
                 currentHealth = value;
-                OnHealthChanged?.Invoke(value);
+                OnHealthChanged?.Invoke(value, maxHealth);
             }
         }
 
+        private readonly int maxHealth;
         private int currentHealth;
 
-        public Health(int initialHealth)
+        public Health(int maxHealth)
         {
-            CurrentHealth = initialHealth;
+            this.maxHealth = maxHealth;
+            CurrentHealth = maxHealth;
         }
 
         public void TakeDamage(int damage)

@@ -5,7 +5,7 @@ namespace DefaultCompany.Player
 {
     public class TowerFacade : MonoBehaviour, IDamageable
     {
-        public event Action<int> OnHealthChanged
+        public event Action<int, int> OnHealthChanged
         {
             add => health.OnHealthChanged += value;
             remove => health.OnHealthChanged -= value;

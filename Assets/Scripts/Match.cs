@@ -1,4 +1,5 @@
 ﻿using DefaultCompany.Player;
+using DefaultCompany.UI;
 using UnityEngine;
 
 namespace DefaultCompany
@@ -6,7 +7,7 @@ namespace DefaultCompany
     public class Match : MonoBehaviour
     {
         [SerializeField]
-        private GameObject healthGauge;
+        private Gauge healthGauge;
 
         [SerializeField]
         private TowerFacade tower;
@@ -16,9 +17,9 @@ namespace DefaultCompany
             tower.OnHealthChanged += HandleTowerHealthChanged;
         }
 
-        private void HandleTowerHealthChanged(int currentHealth)
+        private void HandleTowerHealthChanged(int currentHealth, int maxHealth)
         {
-            Debug.Log("Tower health: " +  currentHealth);
+            healthGauge.UpdateGauge(currentHealth, maxHealth);
         }
 
         private void OnDestroy()
