@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using Assets.Scripts.Enemy;
+using System;
 
 namespace DefaultCompany.Enemy
 {
@@ -7,9 +7,9 @@ namespace DefaultCompany.Enemy
     {
         private readonly IDamageable health;
 
-        private readonly GameObject view;
+        private readonly EnemyView view;
 
-        public EnemyController(IDamageable health, GameObject view)
+        public EnemyController(IDamageable health, EnemyView view)
         {
             this.health = health;
             this.view = view;
@@ -17,17 +17,29 @@ namespace DefaultCompany.Enemy
 
         public void Initialize()
         {
+            health.OnHealthChanged += HandleHealthChanged;
             health.OnDied += HandleDied;
+        }
+
+        private void HandleHealthChanged(int currentHealth, int _)
+        {
+            if (currentHealth > 0)
+            {
+                view.PlayPulseEffect();
+                view.PlayDamageSound();
+            }
         }
 
         private void HandleDied()
         {
-            view.SetActive(false);
+            view.Disable();
+            view.PlayDeathSound();
         }
 
         public void Dispose()
         {
             health.OnDied -= HandleDied;
+            health.OnHealthChanged -= HandleHealthChanged;
         }
     }
 }

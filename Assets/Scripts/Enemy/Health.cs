@@ -31,7 +31,10 @@ namespace DefaultCompany.Enemy
         {
             CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
 
-            OnDied?.Invoke();
+            if (CurrentHealth == 0)
+            {
+                OnDied?.Invoke();
+            }
         }
     }
 }
