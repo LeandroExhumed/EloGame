@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Player
 {
-    public class Tower : IDamageable
+    public class Health : IDamageable
     {
         public event Action<int> OnHealthChanged;
         public event Action OnDied;
@@ -20,11 +20,19 @@ namespace DefaultCompany.Player
 
         private int currentHealth;
 
+        public Health(int initialHealth)
+        {
+            CurrentHealth = initialHealth;
+        }
+
         public void TakeDamage(int damage)
         {
             CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
 
-            OnDied?.Invoke();
+            if (CurrentHealth == 0)
+            {
+                OnDied?.Invoke();
+            }
         }
     }
 }

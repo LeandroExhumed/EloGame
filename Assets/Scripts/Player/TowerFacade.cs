@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultCompany.Enemy
+namespace DefaultCompany.Player
 {
-    public class EnemyFacade : MonoBehaviour, IDamageable
+    public class TowerFacade : MonoBehaviour, IDamageable
     {
         public event Action<int> OnHealthChanged
         {
@@ -16,27 +16,20 @@ namespace DefaultCompany.Enemy
             remove => health.OnDied -= value;
         }
 
-        private ITickable movement;
         private IDamageable health;
 
-        private EnemyController controller;
+        private TowerController controller;
 
         private void Awake()
         {
             Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            movement = new Movement(0.01f, 1, 1f, transform, targetPosition);
-            health = new Health(2);
+            health = new Health(20);
             controller = new(health, gameObject);
         }
 
         private void OnEnable()
         {
             controller.Initialize();
-        }
-
-        private void Update()
-        {
-            movement.Tick();
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
