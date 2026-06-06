@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 619124244}
   - component: {fileID: 619124243}
+  - component: {fileID: 619124245}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -216,6 +217,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &619124245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619124242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &966908603
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +634,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33ee91087caa904eb5c20c1677884f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Spawner
-  charizardPrefab: {fileID: 3540635605752298623, guid: 4b6df10e5bd7b374ab52e1f42ebf8a39, type: 3}
+  imageManager: {fileID: 1356667813}
+  arObjectPrefab: {fileID: 566020580157701422, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
+  nonARObjectPrefab: {fileID: 4209915166165415969, guid: 7798334feea1f8e40b28a971be05eb77, type: 3}
   trackText: {fileID: 966908605}
   resultText: {fileID: 1019474628}
 --- !u!1 &1780145207
@@ -988,7 +1020,7 @@ GameObject:
   - component: {fileID: 2128626202}
   - component: {fileID: 2128626201}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DebugUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
