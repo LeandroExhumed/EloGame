@@ -1,11 +1,16 @@
-﻿using DG.Tweening;
+﻿using DefaultCompany.UI;
+using DG.Tweening;
 using UnityEngine;
 
 namespace DefaultCompany.Player
 {
     public class TowerView : MonoBehaviour
     {
-        [Header("Pulse effect on damage")]
+        [Header("UI")]
+        [SerializeField]
+        private Gauge healthGauge;
+
+        [Header("Pulse effect")]
         [SerializeField]
         private float punchStrength = 0.1f;
         [SerializeField]
@@ -22,6 +27,8 @@ namespace DefaultCompany.Player
         private AudioClip damageSound;
         [SerializeField]
         private AudioClip deathSound;
+
+        public void SetHealthGauge(float currentHealth, float maxHealth) => healthGauge.UpdateGauge(currentHealth, maxHealth);
 
         public void PlayPulseEffect()
         {

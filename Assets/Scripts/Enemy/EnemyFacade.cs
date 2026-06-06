@@ -28,10 +28,7 @@ namespace DefaultCompany.Enemy
             movement = new Movement(0.01f, 1, 1f, transform, targetPosition);
             health = new Health(2);
             controller = new(health, GetComponent<EnemyView>());
-        }
 
-        private void OnEnable()
-        {
             controller.Initialize();
         }
 

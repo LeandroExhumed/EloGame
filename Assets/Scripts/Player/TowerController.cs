@@ -21,13 +21,14 @@ namespace DefaultCompany.Player
             health.OnDied += HandleDied;
         }
 
-        private void HandleHealthChanged(int currentHealth, int _)
+        private void HandleHealthChanged(int currentHealth, int maxHealth)
         {
             if (currentHealth > 0)
             {
                 view.PlayPulseEffect();
                 view.PlayDamageSound();
             }
+            view.SetHealthGauge(currentHealth, maxHealth);
         }
 
         private void HandleDied()
