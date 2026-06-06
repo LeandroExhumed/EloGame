@@ -27,6 +27,7 @@ namespace DefaultCompany.Match
         private void HandleGameOver()
         {
             view.SetGameplayUIActive(false);
+            view.OpenGameOverPanel();
         }
 
         private void HandleScoreChanged(int currentScore)

@@ -8,6 +8,8 @@ namespace DefaultCompany.Match
         [Header("UI")]
         [SerializeField]
         private GameObject gameplayUI;
+        [SerializeField]
+        private GameOverPanel gameoverPanel;
 
         [SerializeField]
         private TextMeshProUGUI scoreText;
@@ -25,6 +27,7 @@ namespace DefaultCompany.Match
         public void SetScoreText(string text)
         {
             scoreText.text = text;
+            gameoverPanel.SetScoreText(text);
         }
 
         public void SetCountdownText(string text)
@@ -35,6 +38,11 @@ namespace DefaultCompany.Match
         public void PlayTickSound()
         {
             audioSource.PlayOneShot(tickSound);
+        }
+
+        public void OpenGameOverPanel()
+        {
+            gameoverPanel.Open();
         }
     }
 }
