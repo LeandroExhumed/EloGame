@@ -7,6 +7,9 @@ namespace DefaultCompany.Match
     public class MatchFacade : MonoBehaviour
     {
         [SerializeField]
+        private MatchData data;
+
+        [SerializeField]
         private TowerFacade tower;
         [SerializeField]
         private EnemyFactory enemyFactory;
@@ -20,7 +23,7 @@ namespace DefaultCompany.Match
 
         private void Awake()
         {
-            model = new MatchModel(new InputRunner(1, mainCamera), enemyFactory, tower);
+            model = new MatchModel(data, new InputRunner(data.PlayerDamage, mainCamera), enemyFactory, tower);
             controller = new(model, GetComponent<MatchView>());
 
             controller.Initialize();

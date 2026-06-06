@@ -17,6 +17,9 @@ namespace DefaultCompany.Enemy
             remove => health.OnDied -= value;
         }
 
+        [SerializeField]
+        private EnemyData data;
+
         private ITickable movement;
         private IDamageable health;
 
@@ -25,8 +28,8 @@ namespace DefaultCompany.Enemy
         private void Awake()
         {
             Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            movement = new Movement(0.03f, 1, 1f, transform, targetPosition);
-            health = new Health(3);
+            movement = new Movement(data, transform, targetPosition);
+            health = new Health(data.MaxHealth);
             controller = new(health, GetComponent<EnemyView>());
 
             controller.Initialize();

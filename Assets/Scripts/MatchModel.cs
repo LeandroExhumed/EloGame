@@ -30,11 +30,12 @@ namespace DefaultCompany.Match
             }
         }
 
+        private MatchData data;
+
         private bool isOver = false;
 
         private int currentScore = 0;
 
-        private readonly float matchDuration = 60f;
         private float countdown;
 
         private float spawnCounter = 0f;
@@ -44,8 +45,9 @@ namespace DefaultCompany.Match
         private readonly EnemyFactory enemyFactory;
         private readonly IDamageable tower;
 
-        public MatchModel(InputRunner inputRunner, EnemyFactory enemyFactory, IDamageable tower)
+        public MatchModel(MatchData data, InputRunner inputRunner, EnemyFactory enemyFactory, IDamageable tower)
         {
+            this.data = data;
             this.inputRunner = inputRunner;
             this.enemyFactory = enemyFactory;
             this.tower = tower;
@@ -54,7 +56,7 @@ namespace DefaultCompany.Match
         public void Initialize()
         {
             CurrentScore = 0;
-            Countdown = matchDuration;
+            Countdown = data.Duration;
 
             tower.OnDied += HandleTowerDied;
         }
@@ -77,7 +79,7 @@ namespace DefaultCompany.Match
                 Countdown -= Time.deltaTime;
             }
 
-            if (spawnCounter >= 2f)
+            if (spawnCounter >= data.SpawnRate)
             {
                 SpawnEnemy();
                 spawnCounter = 0f;

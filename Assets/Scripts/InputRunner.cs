@@ -6,13 +6,13 @@ namespace DefaultCompany
 {
     public class InputRunner : ITickable
     {
-        private readonly int power;
+        private readonly int playerDamage;
         
         private readonly Camera mainCamera;
 
-        public InputRunner(int power, Camera mainCamera)
+        public InputRunner(int playerDamage, Camera mainCamera)
         {
-            this.power = power;
+            this.playerDamage = playerDamage;
             this.mainCamera = mainCamera;
 
             EnhancedTouchSupport.Enable();
@@ -39,7 +39,7 @@ namespace DefaultCompany
             {
                 if (hit.collider.gameObject.TryGetComponent<IDamageable>(out IDamageable hurt))
                 {
-                    hurt.TakeDamage(power);
+                    hurt.TakeDamage(playerDamage);
                 }
             }
         }

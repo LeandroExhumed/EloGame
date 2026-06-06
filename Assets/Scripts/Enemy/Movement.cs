@@ -4,10 +4,7 @@ namespace DefaultCompany.Enemy
 {
     public class Movement : ITickable
     {
-        private readonly float speed;
-
-        private readonly int power;
-        private readonly float attackCooldown;
+        private readonly EnemyData data;
         private float cooldownCounter = 0f;
 
         private readonly Transform transform;
@@ -15,23 +12,23 @@ namespace DefaultCompany.Enemy
         private const int TARGET_LAYERMASK = 1 << 6;
         private readonly Vector3 targetPosition;
 
-        public Movement(float speed, int power, float attackCooldown, Transform transform, Vector3 targetPosition)
+        public Movement(EnemyData data, Transform transform, Vector3 targetPosition)
         {
-            this.speed = speed;
-            this.power = power;
-            this.attackCooldown = attackCooldown;
+            this.data= data;
             this.transform = transform;
             this.targetPosition = targetPosition;
         }
 
         public void Tick()
         {
-            if (Vector3.Distance(transform.position, targetPosition) >= 0.02f)
+            if (Vector3.Distance(transform.position, targetPosition) >= data.DistanceToAttack)
             {
                 Vector3 direction = (targetPosition - transform.position).normalized;
                 Vector3 destination = transform.position + direction;
-                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+                transform.SetPositionAndRotation(
+                    Vector3.MoveTowards(transform.position, destination, data.Speed * Time.deltaTime),
+                    Quaternion.LookRotation(direction, Vector3.up)
+                );
             }
             else
             {
@@ -41,14 +38,14 @@ namespace DefaultCompany.Enemy
 
         private void CheckAttackCondition()
         {
-            if (cooldownCounter >= attackCooldown)
+            if (cooldownCounter >= data.AttackRate)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, TARGET_LAYERMASK))
                 {
                     if (hit.transform.TryGetComponent(out IDamageable damageable))
                     {
-                        damageable.TakeDamage(power);
+                        damageable.TakeDamage(data.AttackDamage);
                     }
                 }
                 cooldownCounter = 0f;

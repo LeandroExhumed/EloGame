@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90da951515f6b24f9334d74ed2ff5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Player.PlayerFacade
+  data: {fileID: 11400000, guid: 2633d36794d1e0e40844493780550813, type: 2}
 --- !u!114 &1770457572133135940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0b74836bacfcf43aeedc691591159e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Player.TowerView
+  healthGauge: {fileID: 0}
   punchStrength: 0.05
   duration: 0.2
   vibrato: 10

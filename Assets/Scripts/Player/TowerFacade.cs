@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DefaultCompany.Match;
+using System;
 using UnityEngine;
 
 namespace DefaultCompany.Player
@@ -16,6 +17,9 @@ namespace DefaultCompany.Player
             remove => health.OnDied -= value;
         }
 
+        [SerializeField]
+        private MatchData data;
+
         private IDamageable health;
 
         private TowerController controller;
@@ -23,7 +27,7 @@ namespace DefaultCompany.Player
         private void Awake()
         {
             Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            health = new Health(20, GetComponent<Collider>());
+            health = new Health(data.TowerHealth, GetComponent<Collider>());
             controller = new(health, GetComponent<TowerView>());
 
             controller.Initialize();

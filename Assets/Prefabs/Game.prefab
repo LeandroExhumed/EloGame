@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b7966494f5de4488769296743e86e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Match.MatchFacade
+  data: {fileID: 11400000, guid: 2633d36794d1e0e40844493780550813, type: 2}
   tower: {fileID: 0}
   enemyFactory: {fileID: 0}
   mainCamera: {fileID: 0}
