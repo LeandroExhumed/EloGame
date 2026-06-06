@@ -306,7 +306,7 @@ MonoBehaviour:
   elasticity: 1
   audioSource: {fileID: 2279484720502723895}
   damageSound: {fileID: 8300000, guid: 013d7a2dddcda67489918b367fe11aa4, type: 3}
-  deathSound: {fileID: 8300000, guid: ee424a8f9598c394684eb6e2227a7131, type: 3}
+  deathSound: {fileID: 8300000, guid: 791848c96e4506046a3f9b78790862ae, type: 3}
 --- !u!1 &8768248040047006724
 GameObject:
   m_ObjectHideFlags: 0
