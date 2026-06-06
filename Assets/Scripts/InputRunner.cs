@@ -4,19 +4,21 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace DefaultCompany
 {
-    public class InputRunner : MonoBehaviour
+    public class InputRunner : ITickable
     {
-        [SerializeField]
-        private int power = 1;
-        [SerializeField]
-        private Camera mainCamera;
+        private readonly int power;
+        
+        private readonly Camera mainCamera;
 
-        private void Awake()
+        public InputRunner(int power, Camera mainCamera)
         {
+            this.power = power;
+            this.mainCamera = mainCamera;
+
             EnhancedTouchSupport.Enable();
         }
 
-        private void Update()
+        public void Tick()
         {
             var activeTouches = Touch.activeTouches;
 

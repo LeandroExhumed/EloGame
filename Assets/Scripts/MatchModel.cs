@@ -40,11 +40,13 @@ namespace DefaultCompany.Match
         private float spawnCounter = 0f;
         private readonly List<EnemyFacade> enemies = new();
 
-        private readonly IDamageable tower;
+        private readonly InputRunner inputRunner;
         private readonly EnemyFactory enemyFactory;
+        private readonly IDamageable tower;
 
-        public MatchModel(EnemyFactory enemyFactory, IDamageable tower)
+        public MatchModel(InputRunner inputRunner, EnemyFactory enemyFactory, IDamageable tower)
         {
+            this.inputRunner = inputRunner;
             this.enemyFactory = enemyFactory;
             this.tower = tower;
         }
@@ -63,6 +65,8 @@ namespace DefaultCompany.Match
             {
                 return;
             }
+
+            inputRunner.Tick();
 
             if (Countdown <= 0f)
             {

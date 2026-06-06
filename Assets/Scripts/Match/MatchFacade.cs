@@ -11,13 +11,16 @@ namespace DefaultCompany.Match
         [SerializeField]
         private EnemyFactory enemyFactory;
 
+        [SerializeField]
+        private Camera mainCamera;
+
         private MatchModel model;
 
         private MatchController controller;
 
         private void Awake()
         {
-            model = new MatchModel(enemyFactory, tower);
+            model = new MatchModel(new InputRunner(1, mainCamera), enemyFactory, tower);
             controller = new(model, GetComponent<MatchView>());
 
             controller.Initialize();
