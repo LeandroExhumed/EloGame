@@ -25,14 +25,14 @@ namespace DefaultCompany.Enemy
         {
             if (currentHealth > 0)
             {
-                view.PlayPulseEffect();
+                view.PlayPulseEffect(false);
                 view.PlayDamageSound();
             }
         }
 
         private void HandleDied()
         {
-            view.Disable();
+            view.PlayPulseEffect(true);
             view.PlayDeathSound();
         }
 

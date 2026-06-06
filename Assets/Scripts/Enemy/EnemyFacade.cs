@@ -25,8 +25,8 @@ namespace DefaultCompany.Enemy
         private void Awake()
         {
             Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            movement = new Movement(0.05f, 1, 1f, transform, targetPosition);
-            health = new Health(2);
+            movement = new Movement(0.03f, 1, 1f, transform, targetPosition);
+            health = new Health(3);
             controller = new(health, GetComponent<EnemyView>());
 
             controller.Initialize();

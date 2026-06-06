@@ -23,27 +23,25 @@ namespace Assets.Scripts.Enemy
         [SerializeField]
         private AudioClip deathSound;
 
-        public void PlayPulseEffect()
+        public void PlayPulseEffect(bool disableOnComplete)
         {
             transform.DOKill(true);
-            transform.DOPunchScale(Vector3.one * punchStrength, duration, vibrato, elasticity).SetEase(Ease.OutCirc);
+            transform.DOPunchScale(Vector3.one * punchStrength, duration, vibrato, elasticity)
+                .SetEase(Ease.OutCirc)
+                .OnComplete(() =>
+                {
+;                   if (disableOnComplete) gameObject.SetActive(false);
+                });
         }
 
         public void PlayDamageSound()
         {
-            audioSource.Stop();
             audioSource.PlayOneShot(damageSound);
-        }
-
-        public void Disable()
-        {
-            gameObject.SetActive(false);
         }
 
         public void PlayDeathSound()
         {
-            audioSource.Stop();
-            audioSource.PlayOneShot(deathSound);
+            AudioSource.PlayClipAtPoint(deathSound, transform.position);
         }
     }
 }
