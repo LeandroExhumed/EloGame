@@ -624,6 +624,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IndieSpirit.Rupture.UI.Gauge
   fillableImage: {fileID: 1730925732}
+--- !u!114 &217010820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6972507296323912380, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
+  m_PrefabInstance: {fileID: 4410516896767498928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c80953101cca14a80dfbd24b4c3fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyFactory
 --- !u!1 &224519284
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,17 +836,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361614976}
   m_CullTransparentMesh: 1
---- !u!114 &539372787 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4532062475099818311, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
-  m_PrefabInstance: {fileID: 4410516896767498928}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba1b45ea000504798ab4674b7a4426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyModel
 --- !u!114 &952797306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6279689780952128069, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
@@ -984,17 +984,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1157202037 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6637451845725027497, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
-  m_PrefabInstance: {fileID: 4410516896767498928}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba1b45ea000504798ab4674b7a4426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyModel
 --- !u!1 &1468412156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,17 +1150,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1656206081 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5433241056816922983, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
-  m_PrefabInstance: {fileID: 4410516896767498928}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba1b45ea000504798ab4674b7a4426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyModel
 --- !u!1 &1698579856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,17 +1304,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1730925730}
   m_CullTransparentMesh: 1
---- !u!114 &1732092642 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5166679929512466654, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
-  m_PrefabInstance: {fileID: 4410516896767498928}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba1b45ea000504798ab4674b7a4426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyModel
 --- !u!1 &1805502601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,17 +1481,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851205693}
   m_CullTransparentMesh: 1
---- !u!114 &1946127765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3533144965893382678, guid: 6e10d4855a17a2d4eaf7abd014606570, type: 3}
-  m_PrefabInstance: {fileID: 4410516896767498928}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba1b45ea000504798ab4674b7a4426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Enemy.EnemyModel
 --- !u!1 &1951432839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,12 +1732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Match.MatchFacade
   tower: {fileID: 952797306}
-  enemies:
-  - {fileID: 1157202037}
-  - {fileID: 1656206081}
-  - {fileID: 1946127765}
-  - {fileID: 1732092642}
-  - {fileID: 539372787}
+  enemyFactory: {fileID: 217010820}
 --- !u!1001 &4410516896767498928
 PrefabInstance:
   m_ObjectHideFlags: 0

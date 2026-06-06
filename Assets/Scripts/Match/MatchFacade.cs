@@ -9,7 +9,7 @@ namespace DefaultCompany.Match
         [SerializeField]
         private TowerFacade tower;
         [SerializeField]
-        private EnemyFacade[] enemies;
+        private EnemyFactory enemyFactory;
 
         private MatchModel model;
 
@@ -17,7 +17,7 @@ namespace DefaultCompany.Match
 
         private void Awake()
         {
-            model = new MatchModel(tower, enemies);
+            model = new MatchModel(enemyFactory, tower);
             controller = new(model, GetComponent<MatchView>());
 
             controller.Initialize();

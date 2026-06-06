@@ -1,5 +1,6 @@
 ﻿using DefaultCompany.Enemy;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DefaultCompany.Match
@@ -33,16 +34,19 @@ namespace DefaultCompany.Match
 
         private int currentScore = 0;
 
-        private readonly float matchDuration = 20f;
-        private float countdown = 0f;
+        private readonly float matchDuration = 60f;
+        private float countdown;
+
+        private float spawnCounter = 0f;
+        private readonly List<EnemyFacade> enemies = new();
 
         private readonly IDamageable tower;
-        private readonly EnemyFacade[] enemies;
+        private readonly EnemyFactory enemyFactory;
 
-        public MatchModel(IDamageable tower, EnemyFacade[] enemies)
+        public MatchModel(EnemyFactory enemyFactory, IDamageable tower)
         {
+            this.enemyFactory = enemyFactory;
             this.tower = tower;
-            this.enemies = enemies;
         }
 
         public void Initialize()
@@ -51,10 +55,6 @@ namespace DefaultCompany.Match
             Countdown = matchDuration;
 
             tower.OnDied += HandleTowerDied;
-            foreach (var enemy in enemies)
-            {
-                enemy.OnDied += HandleEnemyDied;
-            }
         }
 
         public void Tick()
@@ -72,6 +72,23 @@ namespace DefaultCompany.Match
             {
                 Countdown -= Time.deltaTime;
             }
+
+            if (spawnCounter >= 2f)
+            {
+                SpawnEnemy();
+                spawnCounter = 0f;
+            }
+            else
+            {
+                spawnCounter += Time.deltaTime;
+            }
+        }
+
+        private void SpawnEnemy()
+        {
+            EnemyFacade enemy = enemyFactory.GetEnemy();
+            enemies.Add(enemy);
+            enemy.OnDied += HandleEnemyDied;
         }
 
         private void FinishGame()
@@ -92,10 +109,10 @@ namespace DefaultCompany.Match
 
         public void Dispose()
         {
-            foreach (var enemy in enemies)
+            tower.OnDied -= HandleTowerDied;
+            for (int i = 0; i < enemies.Count; i++)
             {
-                tower.OnDied -= HandleTowerDied;
-                enemy.OnDied -= HandleEnemyDied;
+                enemies[i].OnDied -= HandleEnemyDied;
             }
         }
     }
