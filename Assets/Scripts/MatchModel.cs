@@ -35,11 +35,13 @@ namespace DefaultCompany.Match
 
         private readonly float matchDuration = 20f;
         private float countdown = 0f;
-        
+
+        private readonly IDamageable tower;
         private readonly EnemyFacade[] enemies;
 
-        public MatchModel(EnemyFacade[] enemies)
+        public MatchModel(IDamageable tower, EnemyFacade[] enemies)
         {
+            this.tower = tower;
             this.enemies = enemies;
         }
 
@@ -47,8 +49,8 @@ namespace DefaultCompany.Match
         {
             CurrentScore = 0;
             Countdown = matchDuration;
-            //lastSecondRegistered = Mathf.CeilToInt(Counter);
 
+            tower.OnDied += HandleTowerDied;
             foreach (var enemy in enemies)
             {
                 enemy.OnDied += HandleEnemyDied;
@@ -57,15 +59,30 @@ namespace DefaultCompany.Match
 
         public void Tick()
         {
-            if (!isOver && Countdown <= 0f)
+            if (isOver)
             {
-                isOver = true;
-                OnGameOver?.Invoke();
+                return;
+            }
+
+            if (Countdown <= 0f)
+            {
+                FinishGame();
             }
             else
             {
                 Countdown -= Time.deltaTime;
             }
+        }
+
+        private void FinishGame()
+        {
+            isOver = true;
+            OnGameOver?.Invoke();
+        }
+
+        private void HandleTowerDied()
+        {
+            FinishGame();
         }
 
         private void HandleEnemyDied()
@@ -77,6 +94,7 @@ namespace DefaultCompany.Match
         {
             foreach (var enemy in enemies)
             {
+                tower.OnDied -= HandleTowerDied;
                 enemy.OnDied -= HandleEnemyDied;
             }
         }

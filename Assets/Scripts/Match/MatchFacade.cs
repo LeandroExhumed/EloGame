@@ -1,10 +1,13 @@
 ﻿using DefaultCompany.Enemy;
+using DefaultCompany.Player;
 using UnityEngine;
 
 namespace DefaultCompany.Match
 {
     public class MatchFacade : MonoBehaviour
     {
+        [SerializeField]
+        private TowerFacade tower;
         [SerializeField]
         private EnemyFacade[] enemies;
 
@@ -14,7 +17,7 @@ namespace DefaultCompany.Match
 
         private void Awake()
         {
-            model = new MatchModel(enemies);
+            model = new MatchModel(tower, enemies);
             controller = new(model, GetComponent<MatchView>());
 
             controller.Initialize();
