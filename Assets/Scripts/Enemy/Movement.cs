@@ -10,13 +10,16 @@ namespace DefaultCompany.Enemy
         private readonly Transform transform;
 
         private const int TARGET_LAYERMASK = 1 << 6;
+        private readonly Transform target;
         private readonly Vector3 targetPosition;
 
-        public Movement(EnemyData data, Transform transform, Vector3 targetPosition)
+        public Movement(EnemyData data, Transform transform, Transform target)
         {
             this.data= data;
             this.transform = transform;
-            this.targetPosition = targetPosition;
+            this.target = target;
+            targetPosition = target.position;
+            targetPosition.y += Random.Range(-0.03f, 0.03f);
         }
 
         public void Tick()
@@ -40,13 +43,9 @@ namespace DefaultCompany.Enemy
         {
             if (cooldownCounter >= data.AttackRate)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, TARGET_LAYERMASK))
+                if (target.TryGetComponent(out IDamageable damageable))
                 {
-                    if (hit.transform.TryGetComponent(out IDamageable damageable))
-                    {
-                        damageable.TakeDamage(data.AttackDamage);
-                    }
+                    damageable.TakeDamage(data.AttackDamage);
                 }
                 cooldownCounter = 0f;
             }

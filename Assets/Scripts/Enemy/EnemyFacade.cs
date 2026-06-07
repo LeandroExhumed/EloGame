@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enemy;
+using DefaultCompany.Player;
 using System;
 using UnityEngine;
 
@@ -27,8 +28,9 @@ namespace DefaultCompany.Enemy
 
         private void Awake()
         {
-            Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
-            movement = new Movement(data, transform, targetPosition);
+            // I would use D.I here but for this game is too much.
+            Transform target = FindFirstObjectByType<TowerFacade>().transform;
+            movement = new Movement(data, transform, target);
             health = new Health(data.MaxHealth);
             controller = new(health, GetComponent<EnemyView>());
 
