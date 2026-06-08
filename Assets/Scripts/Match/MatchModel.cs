@@ -1,15 +1,16 @@
 ﻿using DefaultCompany.Enemy;
+using DefaultCompany.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DefaultCompany.Match
 {
-    public class MatchModel : ITickable, IDisposable
+    public class MatchModel : IMatch
     {
         public event Action<int> OnScoreChanged;
         public event Action<float> OnCountdownChanged;
-        public event Action OnGameOver;
+        public event Action<int> OnGameOver;
         public event Action OnRestart;
 
         private int CurrentScore
@@ -117,7 +118,7 @@ namespace DefaultCompany.Match
                 enemies[i].TakeDamage(int.MaxValue);
             }
 
-            OnGameOver?.Invoke();
+            OnGameOver?.Invoke(CurrentScore);
         }
 
         private void HandleTowerDied(bool _)

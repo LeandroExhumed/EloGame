@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Player
 {
-    public class TowerController : IDisposable
+    public class TowerController : IController
     {
         private readonly IDamageable health;
 
@@ -30,6 +30,10 @@ namespace DefaultCompany.Player
 
         private void HandleHealthChanged(int currentHealth, int maxHealth)
         {
+            if (currentHealth == maxHealth)
+            {
+                view.PlayFanRotation();
+            }
             view.SetHealthGauge(currentHealth, maxHealth);
         }
 

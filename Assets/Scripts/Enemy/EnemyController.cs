@@ -3,7 +3,7 @@ using System;
 
 namespace DefaultCompany.Enemy
 {
-    public  class EnemyController : IDisposable
+    public  class EnemyController : IController
     {
         private readonly IDamageable health;
 

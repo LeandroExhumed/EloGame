@@ -1,17 +1,18 @@
-﻿using System;
+﻿using DefaultCompany.Utils;
 using UnityEngine;
 
 namespace DefaultCompany.Match
 {
-    public class MatchController : IDisposable
+    public class MatchController : IController
     {
+        private const string HIGH_SCORE_DATA = "high_score.dat";
         private int lastSecondRegistered;
 
-        private readonly MatchModel model;
+        private readonly IMatch model;
 
         private readonly MatchView view;
 
-        public MatchController(MatchModel model, MatchView view)
+        public MatchController(IMatch model, MatchView view)
         {
             this.model = model;
             this.view = view;
@@ -25,10 +26,27 @@ namespace DefaultCompany.Match
             model.OnRestart += HandleRestart;
         }
 
-        private void HandleGameOver()
+        private void HandleGameOver(int currentScore)
         {
             view.SetGameplayUIActive(false);
-            view.OpenGameOverPanel();
+
+            int bestScoreSaved = DataService.Load<int>(HIGH_SCORE_DATA);
+
+            if (bestScoreSaved != 0)
+            {
+                if (currentScore > bestScoreSaved)
+                {
+                    DataService.Save(HIGH_SCORE_DATA, currentScore);
+                    bestScoreSaved = currentScore;
+                }
+            }
+            else
+            {
+                DataService.Save(HIGH_SCORE_DATA, currentScore);
+                bestScoreSaved = currentScore;
+            }
+
+            view.OpenGameOverPanel(currentScore, bestScoreSaved);
         }
 
         private void HandleScoreChanged(int currentScore)

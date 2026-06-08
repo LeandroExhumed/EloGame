@@ -1,4 +1,4 @@
-﻿using DefaultCompany.UI;
+﻿using DefaultCompany.Utils;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +6,14 @@ namespace DefaultCompany.Player
 {
     public class TowerView : MonoBehaviour
     {
+        [Header("Wind turbine fan")]
+        [SerializeField]
+        private Transform fan;
+        [SerializeField]
+        private float rotationSpeed = 2f;
+        [SerializeField]
+        private float fadeDuration = 3f;
+
         [Header("UI")]
         [SerializeField]
         private Gauge healthGauge;
@@ -27,6 +35,29 @@ namespace DefaultCompany.Player
         private AudioClip damageSound;
         [SerializeField]
         private AudioClip deathSound;
+
+        private Tween fanRotationTween;
+        private Tween fadeTween;
+
+        private void Awake()
+        {
+            PlayFanRotation();
+        }
+
+        public void PlayFanRotation()
+        {
+            if (fan == null)
+            {
+                return;
+            }
+
+            fanRotationTween?.Kill();
+
+            fanRotationTween = fan.DORotate(new Vector3(0, 0, 360), rotationSpeed, RotateMode.FastBeyond360)
+                .SetEase(Ease.Linear)
+                .SetLoops(-1, LoopType.Restart)
+                .SetRelative(true);
+        }
 
         public void SetHealthGauge(float currentHealth, float maxHealth)
         {
@@ -53,7 +84,19 @@ namespace DefaultCompany.Player
 
         public void Disable()
         {
-            
+            if (fan == null || fanRotationTween == null)
+            {
+                return;
+            }
+
+            fadeTween?.Kill();
+
+            fadeTween = DOTween.To(() => fanRotationTween.timeScale, x => fanRotationTween.timeScale = x, 0f, fadeDuration)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    fanRotationTween.Kill();
+                });
         }
 
         public void PlayDeathSound()

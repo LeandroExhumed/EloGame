@@ -29,7 +29,7 @@ namespace DefaultCompany.Enemy
         private ITickable movement;
         private IDamageable health;
 
-        private EnemyController controller;
+        private IController controller;
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace DefaultCompany.Enemy
             Transform target = FindFirstObjectByType<TowerFacade>().transform;
             movement = new Movement(data, transform, target);
             health = new Health(data.MaxHealth, GetComponent<Collider>());
-            controller = new(health, GetComponent<EnemyView>());
+            controller = new EnemyController(health, GetComponent<EnemyView>());
 
             controller.Initialize();
         }

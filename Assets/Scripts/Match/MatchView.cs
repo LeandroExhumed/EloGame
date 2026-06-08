@@ -27,7 +27,6 @@ namespace DefaultCompany.Match
         public void SetScoreText(string text)
         {
             scoreText.text = text;
-            gameoverPanel.SetScoreText(text);
         }
 
         public void SetCountdownText(string text)
@@ -40,9 +39,6 @@ namespace DefaultCompany.Match
             audioSource.PlayOneShot(tickSound);
         }
 
-        public void OpenGameOverPanel()
-        {
-            gameoverPanel.Open();
-        }
+        public void OpenGameOverPanel(int currentScore, int highestScore) => gameoverPanel.Open(currentScore, highestScore);
     }
 }
