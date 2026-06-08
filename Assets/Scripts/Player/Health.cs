@@ -6,7 +6,7 @@ namespace DefaultCompany.Player
     public class Health : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
-        public event Action OnDied;
+        public event Action<bool> OnDied;
 
         public int CurrentHealth
         {
@@ -21,13 +21,10 @@ namespace DefaultCompany.Player
         private readonly int maxHealth;
         private int currentHealth;
 
-        private readonly Collider collider;
-
-        public Health(int maxHealth, Collider collider)
+        public Health(int maxHealth)
         {
             this.maxHealth = maxHealth;
             CurrentHealth = maxHealth;
-            this.collider = collider;
         }
 
         public void TakeDamage(int damage)
@@ -36,9 +33,13 @@ namespace DefaultCompany.Player
 
             if (CurrentHealth == 0)
             {
-                collider.enabled = false;
-                OnDied?.Invoke();
+                OnDied?.Invoke(false);
             }
+        }
+
+        public void Restart()
+        {
+            CurrentHealth = maxHealth;
         }
     }
 }

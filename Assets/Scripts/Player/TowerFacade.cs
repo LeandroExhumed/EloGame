@@ -11,7 +11,7 @@ namespace DefaultCompany.Player
             add => health.OnHealthChanged += value;
             remove => health.OnHealthChanged -= value;
         }
-        public event Action OnDied
+        public event Action<bool> OnDied
         {
             add => health.OnDied += value;
             remove => health.OnDied -= value;
@@ -26,13 +26,15 @@ namespace DefaultCompany.Player
 
         private void Awake()
         {
-            health = new Health(data.TowerHealth, GetComponent<Collider>());
+            health = new Health(data.TowerHealth);
             controller = new(health, GetComponent<TowerView>());
 
             controller.Initialize();
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
+
+        public void Restart() => health.Restart();
 
         private void OnDestroy()
         {

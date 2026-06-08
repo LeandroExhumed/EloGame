@@ -53,6 +53,8 @@ namespace DefaultCompany.Match
             model.Tick();
         }
 
+        public void Restart() => model.Restart();
+
         private void OnDestroy()
         {
             model.Dispose();

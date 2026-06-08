@@ -4,7 +4,8 @@ using UnityEngine;
 public interface IDamageable
 {
     event Action<int, int> OnHealthChanged;
-    event Action OnDied;
+    event Action<bool> OnDied;
 
+    void Restart();
     void TakeDamage(int damage);
 }

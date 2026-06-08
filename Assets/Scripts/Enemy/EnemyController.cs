@@ -30,10 +30,17 @@ namespace DefaultCompany.Enemy
             }
         }
 
-        private void HandleDied()
+        private void HandleDied(bool forced)
         {
-            view.PlayPulseEffect(true);
-            view.PlayDeathSound();
+            if (forced)
+            {
+                view.Disable();
+            }
+            else
+            {
+                view.PlayPulseEffect(true);
+                view.PlayDeathSound();
+            }
         }
 
         public void Dispose()

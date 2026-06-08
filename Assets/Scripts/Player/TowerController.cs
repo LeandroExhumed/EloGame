@@ -31,7 +31,7 @@ namespace DefaultCompany.Player
             view.SetHealthGauge(currentHealth, maxHealth);
         }
 
-        private void HandleDied()
+        private void HandleDied(bool _)
         {
             view.Disable();
             view.PlayDeathSound();

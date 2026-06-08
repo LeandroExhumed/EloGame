@@ -14,6 +14,13 @@ public class GameOverPanel : MonoBehaviour
     [SerializeField]
     private float duration = 1f;
 
+    private Vector2 defaultPosition;
+
+    private void Awake()
+    {
+        defaultPosition = rectTransform.position;
+    }
+
     public void Open()
     {
         rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
@@ -22,5 +29,10 @@ public class GameOverPanel : MonoBehaviour
     public void SetScoreText(string text)
     {
         scoreText.text = text;
+    }
+
+    public void Close()
+    {
+        rectTransform.DOAnchorPos(defaultPosition, duration);
     }
 }

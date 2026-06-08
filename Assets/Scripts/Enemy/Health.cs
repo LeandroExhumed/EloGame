@@ -6,7 +6,7 @@ namespace DefaultCompany.Enemy
     public class Health : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
-        public event Action OnDied;
+        public event Action<bool> OnDied;
 
         public int CurrentHealth
         {
@@ -29,12 +29,18 @@ namespace DefaultCompany.Enemy
 
         public void TakeDamage(int damage)
         {
-            CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
+            bool forced = damage == int.MaxValue;
+            CurrentHealth = forced ? 0 : Mathf.Max(0, CurrentHealth - damage);
 
             if (CurrentHealth == 0)
             {
-                OnDied?.Invoke();
+                OnDied?.Invoke(forced);
             }
+        }
+
+        public void Restart()
+        {
+            CurrentHealth = maxHealth;
         }
     }
 }

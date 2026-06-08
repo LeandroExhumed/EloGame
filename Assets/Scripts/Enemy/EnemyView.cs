@@ -30,7 +30,7 @@ namespace Assets.Scripts.Enemy
                 .SetEase(Ease.OutCirc)
                 .OnComplete(() =>
                 {
-;                   if (disableOnComplete) gameObject.SetActive(false);
+;                   if (disableOnComplete) Disable();
                 });
         }
 
@@ -42,6 +42,11 @@ namespace Assets.Scripts.Enemy
         public void PlayDeathSound()
         {
             AudioSource.PlayClipAtPoint(deathSound, transform.position);
+        }
+
+        public void Disable()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

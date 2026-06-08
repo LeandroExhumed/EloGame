@@ -10,6 +10,7 @@ namespace DefaultCompany.Match
         public event Action<int> OnScoreChanged;
         public event Action<float> OnCountdownChanged;
         public event Action OnGameOver;
+        public event Action OnRestart;
 
         private int CurrentScore
         {
@@ -90,6 +91,17 @@ namespace DefaultCompany.Match
             }
         }
 
+        public void Restart()
+        {
+            CurrentScore = 0;
+            Countdown = data.Duration;
+            isOver = false;
+
+            tower.Restart();
+
+            OnRestart?.Invoke();
+        }
+
         private void SpawnEnemy()
         {
             EnemyFacade enemy = enemyFactory.GetEnemy();
@@ -100,17 +112,25 @@ namespace DefaultCompany.Match
         private void FinishGame()
         {
             isOver = true;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].TakeDamage(int.MaxValue);
+            }
+
             OnGameOver?.Invoke();
         }
 
-        private void HandleTowerDied()
+        private void HandleTowerDied(bool _)
         {
             FinishGame();
         }
 
-        private void HandleEnemyDied()
+        private void HandleEnemyDied(bool forced)
         {
-            CurrentScore++;
+            if (!forced)
+            {
+                CurrentScore++; 
+            }
         }
 
         public void Dispose()

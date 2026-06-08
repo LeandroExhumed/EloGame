@@ -12,7 +12,7 @@ namespace DefaultCompany.Enemy
             add => health.OnHealthChanged += value;
             remove => health.OnHealthChanged -= value;
         }
-        public event Action OnDied
+        public event Action<bool> OnDied
         {
             add => health.OnDied += value;
             remove => health.OnDied -= value;
@@ -43,6 +43,8 @@ namespace DefaultCompany.Enemy
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
+
+        public void Restart() => health.Restart();
 
         private void OnDestroy()
         {

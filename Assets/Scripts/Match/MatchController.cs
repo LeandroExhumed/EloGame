@@ -22,6 +22,7 @@ namespace DefaultCompany.Match
             model.OnScoreChanged += HandleScoreChanged;
             model.OnCountdownChanged += HandleCountdownChanged;
             model.OnGameOver += HandleGameOver;
+            model.OnRestart += HandleRestart;
         }
 
         private void HandleGameOver()
@@ -53,10 +54,17 @@ namespace DefaultCompany.Match
             }
         }
 
+        private void HandleRestart()
+        {
+            view.SetGameplayUIActive(true);
+        }
+
         public void Dispose()
         {
             model.OnScoreChanged -= HandleScoreChanged;
             model.OnCountdownChanged -= HandleCountdownChanged;
+            model.OnGameOver -= HandleGameOver;
+            model.OnRestart -= HandleRestart;
         }
     }
 }
