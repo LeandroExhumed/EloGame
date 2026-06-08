@@ -31,7 +31,7 @@ namespace DefaultCompany.Enemy
             // I would use D.I here but for this game is too much.
             Transform target = FindFirstObjectByType<TowerFacade>().transform;
             movement = new Movement(data, transform, target);
-            health = new Health(data.MaxHealth);
+            health = new Health(data.MaxHealth, GetComponent<Collider>());
             controller = new(health, GetComponent<EnemyView>());
 
             controller.Initialize();

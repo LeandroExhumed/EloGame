@@ -21,10 +21,13 @@ namespace DefaultCompany.Enemy
         private readonly int maxHealth;
         private int currentHealth;
 
-        public Health(int maxHealth)
+        private readonly Collider collider;
+
+        public Health(int maxHealth, Collider collider)
         {
             this.maxHealth = maxHealth;
             CurrentHealth = maxHealth;
+            this.collider = collider;
         }
 
         public void TakeDamage(int damage)
@@ -34,6 +37,7 @@ namespace DefaultCompany.Enemy
 
             if (CurrentHealth == 0)
             {
+                collider.enabled = false;
                 OnDied?.Invoke(forced);
             }
         }
@@ -41,6 +45,7 @@ namespace DefaultCompany.Enemy
         public void Restart()
         {
             CurrentHealth = maxHealth;
+            collider.enabled = true;
         }
     }
 }
