@@ -28,7 +28,16 @@ namespace DefaultCompany.Player
         [SerializeField]
         private AudioClip deathSound;
 
-        public void SetHealthGauge(float currentHealth, float maxHealth) => healthGauge.UpdateGauge(currentHealth, maxHealth);
+        public void SetHealthGauge(float currentHealth, float maxHealth)
+        {
+            // I would use D.I here but for this game is too much.
+            if (healthGauge == null)
+            {
+                healthGauge = FindFirstObjectByType<Gauge>();
+            }
+
+            healthGauge?.UpdateGauge(currentHealth, maxHealth);
+        }
 
         public void PlayPulseEffect()
         {

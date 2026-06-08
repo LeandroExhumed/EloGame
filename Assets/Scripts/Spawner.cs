@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -8,18 +9,24 @@ namespace DefaultCompany
     public class Spawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject charizardPrefab;
+        private ARTrackedImageManager imageManager;
+        [SerializeField]
+        private GameObject arObjectPrefab;
+        [SerializeField]
+        private GameObject nonARObjectPrefab;
+
+        [Header("Debug")]
         [SerializeField]
         private TextMeshProUGUI trackText;
         [SerializeField]
         private TextMeshProUGUI resultText;
-        private GameObject charizard;
 
-        private ARTrackedImageManager imageManager;
+        private GameObject arObject;
+        private GameObject nonARObject;
+
 
         private void OnEnable()
         {
-            imageManager = GetComponent<ARTrackedImageManager>();
             imageManager.trackablesChanged.AddListener(OnImageChanged);
         }
 
@@ -27,7 +34,8 @@ namespace DefaultCompany
         {
             foreach (var trackedImage in eventArgs.added)
             {
-                charizard = Instantiate(charizardPrefab, trackedImage.transform);
+                arObject = Instantiate(arObjectPrefab, trackedImage.transform);
+                StartCoroutine(SpawnNonARObjectDelayed());
                 trackText.text = $"Image detected for the first time: {trackedImage.referenceImage.name}";
                 UpdateTrackingStatus(trackedImage);
             }
@@ -42,6 +50,7 @@ namespace DefaultCompany
                 trackText.text = $"Image tracking reference removed completely";
             }
         }
+
         private void UpdateTrackingStatus(ARTrackedImage trackedImage)
         {
             // Check the specific tracking health from ARCore
@@ -59,6 +68,12 @@ namespace DefaultCompany
             {
                 resultText.text = "None";
             }
+        }
+
+        private IEnumerator SpawnNonARObjectDelayed()
+        {
+            yield return new WaitForEndOfFrame();
+            nonARObject = Instantiate(nonARObjectPrefab);
         }
     }
 }

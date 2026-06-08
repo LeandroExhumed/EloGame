@@ -7,6 +7,8 @@ public class GameOverPanel : MonoBehaviour
     [SerializeField]
     private RectTransform rectTransform;
     [SerializeField]
+    private Vector2 finalPosition;
+    [SerializeField]
     private TextMeshProUGUI scoreText;
 
     [SerializeField]
@@ -14,7 +16,7 @@ public class GameOverPanel : MonoBehaviour
 
     public void Open()
     {
-        rectTransform.DOAnchorPos(Vector2.zero, duration).SetEase(Ease.OutBounce);
+        rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
     }
 
     public void SetScoreText(string text)

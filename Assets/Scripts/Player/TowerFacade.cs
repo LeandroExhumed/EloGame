@@ -26,7 +26,6 @@ namespace DefaultCompany.Player
 
         private void Awake()
         {
-            Vector3 targetPosition = new(0f, UnityEngine.Random.Range(0.025f, 0.1f), 0f);
             health = new Health(data.TowerHealth, GetComponent<Collider>());
             controller = new(health, GetComponent<TowerView>());
 

@@ -23,6 +23,20 @@ namespace DefaultCompany.Match
 
         private void Awake()
         {
+            // I would use D.I here but for this game is too much.
+            if (tower == null)
+            {
+                tower = FindFirstObjectByType<TowerFacade>();
+            }
+            if (enemyFactory == null)
+            {
+                enemyFactory = FindFirstObjectByType<EnemyFactory>();
+            }
+            if (mainCamera == null)
+            {
+                mainCamera = FindFirstObjectByType<Camera>();
+            }
+
             model = new MatchModel(data, new InputRunner(data.PlayerDamage, mainCamera), enemyFactory, tower);
             controller = new(model, GetComponent<MatchView>());
 
