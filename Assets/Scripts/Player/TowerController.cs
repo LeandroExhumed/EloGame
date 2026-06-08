@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Player
 {
-    public class TowerController : IDisposable
+    public class TowerController : IController
     {
         private readonly IDamageable health;
 

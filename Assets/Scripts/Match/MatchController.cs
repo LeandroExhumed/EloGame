@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Match
 {
-    public class MatchController : IDisposable
+    public class MatchController : IController
     {
         private const string HIGH_SCORE_DATA = "high_score.dat";
         private int lastSecondRegistered;

@@ -27,12 +27,12 @@ namespace DefaultCompany.Player
 
         private IDamageable health;
 
-        private TowerController controller;
+        private IController controller;
 
         private void Awake()
         {
             health = new Health(data.TowerHealth);
-            controller = new(health, GetComponent<TowerView>());
+            controller = new TowerController(health, GetComponent<TowerView>());
 
             controller.Initialize();
         }

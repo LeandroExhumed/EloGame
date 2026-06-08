@@ -41,7 +41,7 @@ namespace DefaultCompany.Match
 
         private IMatch model;
 
-        private MatchController controller;
+        private IController controller;
 
         private void Awake()
         {
@@ -60,7 +60,7 @@ namespace DefaultCompany.Match
             }
 
             model = new MatchModel(data, new InputRunner(data.PlayerDamage, mainCamera), enemyFactory, tower);
-            controller = new(model, GetComponent<MatchView>());
+            controller = new MatchController(model, GetComponent<MatchView>());
 
             controller.Initialize();
         }
