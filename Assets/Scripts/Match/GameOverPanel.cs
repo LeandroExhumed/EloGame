@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace DefaultCompany
+namespace DefaultCompany.Match
 {
     public class GameOverPanel : MonoBehaviour
     {
