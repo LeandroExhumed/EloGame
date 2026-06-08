@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79da7141c83169547a2ff4d2a063b01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Enemy.EnemyView
-  punchStrength: 0.4
+  punchStrength: 1
   duration: 0.2
   vibrato: 10
   elasticity: 1
