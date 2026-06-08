@@ -30,6 +30,10 @@ namespace DefaultCompany.Player
 
         private void HandleHealthChanged(int currentHealth, int maxHealth)
         {
+            if (currentHealth == maxHealth)
+            {
+                view.PlayFanRotation();
+            }
             view.SetHealthGauge(currentHealth, maxHealth);
         }
 

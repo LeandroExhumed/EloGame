@@ -157,6 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0b74836bacfcf43aeedc691591159e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultCompany.Player.TowerView
+  fan: {fileID: 8971019184201453605}
+  rotationSpeed: 2
   healthGauge: {fileID: 0}
   punchStrength: 0.05
   duration: 0.2
@@ -348,5 +350,10 @@ PrefabInstance:
 --- !u!4 &7686707996912482479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 484b62ce346a7a14cb96a438121debed, type: 3}
+  m_PrefabInstance: {fileID: 7864997232567787332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8971019184201453605 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1250139382626176865, guid: 484b62ce346a7a14cb96a438121debed, type: 3}
   m_PrefabInstance: {fileID: 7864997232567787332}
   m_PrefabAsset: {fileID: 0}
