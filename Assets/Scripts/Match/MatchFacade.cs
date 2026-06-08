@@ -1,11 +1,33 @@
 ﻿using DefaultCompany.Enemy;
 using DefaultCompany.Player;
+using System;
 using UnityEngine;
 
 namespace DefaultCompany.Match
 {
-    public class MatchFacade : MonoBehaviour
+    public class MatchFacade : MonoBehaviour, IMatch
     {
+        public event Action<int> OnScoreChanged
+        {
+            add => model.OnScoreChanged += value;
+            remove => model.OnScoreChanged -= value;
+        }
+        public event Action<float> OnCountdownChanged
+        {
+            add => model.OnCountdownChanged += value;
+            remove => model.OnCountdownChanged -= value;
+        }
+        public event Action<int> OnGameOver
+        {
+            add => model.OnGameOver += value;
+            remove => model.OnGameOver -= value;
+        }
+        public event Action OnRestart
+        {
+            add => model.OnRestart += value;
+            remove => model.OnRestart-= value;
+        }
+
         [SerializeField]
         private MatchData data;
 
@@ -17,7 +39,7 @@ namespace DefaultCompany.Match
         [SerializeField]
         private Camera mainCamera;
 
-        private MatchModel model;
+        private IMatch model;
 
         private MatchController controller;
 
@@ -48,17 +70,26 @@ namespace DefaultCompany.Match
             model.Initialize();
         }
 
+        public void Initialize() => model.Initialize();
+
+        public void Tick() => model.Tick();
+
         private void Update()
         {
-            model.Tick();
+            Tick();
         }
 
         public void Restart() => model.Restart();
 
-        private void OnDestroy()
+        public void Dispose()
         {
             model.Dispose();
             controller.Dispose();
+        }
+
+        private void OnDestroy()
+        {
+            Dispose();
         }
     }
 }

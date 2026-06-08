@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Match
 {
-    public class MatchModel : ITickable, IDisposable
+    public class MatchModel : IMatch
     {
         public event Action<int> OnScoreChanged;
         public event Action<float> OnCountdownChanged;

@@ -9,11 +9,11 @@ namespace DefaultCompany.Match
         private const string HIGH_SCORE_DATA = "high_score.dat";
         private int lastSecondRegistered;
 
-        private readonly MatchModel model;
+        private readonly IMatch model;
 
         private readonly MatchView view;
 
-        public MatchController(MatchModel model, MatchView view)
+        public MatchController(IMatch model, MatchView view)
         {
             this.model = model;
             this.view = view;
