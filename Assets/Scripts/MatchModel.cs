@@ -9,7 +9,7 @@ namespace DefaultCompany.Match
     {
         public event Action<int> OnScoreChanged;
         public event Action<float> OnCountdownChanged;
-        public event Action OnGameOver;
+        public event Action<int> OnGameOver;
         public event Action OnRestart;
 
         private int CurrentScore
@@ -117,7 +117,7 @@ namespace DefaultCompany.Match
                 enemies[i].TakeDamage(int.MaxValue);
             }
 
-            OnGameOver?.Invoke();
+            OnGameOver?.Invoke(CurrentScore);
         }
 
         private void HandleTowerDied(bool _)

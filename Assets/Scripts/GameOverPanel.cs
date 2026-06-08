@@ -9,7 +9,9 @@ public class GameOverPanel : MonoBehaviour
     [SerializeField]
     private Vector2 finalPosition;
     [SerializeField]
-    private TextMeshProUGUI scoreText;
+    private TextMeshProUGUI currentScoreText;
+    [SerializeField]
+    private TextMeshProUGUI highestScoreText;
 
     [SerializeField]
     private float duration = 1f;
@@ -21,14 +23,12 @@ public class GameOverPanel : MonoBehaviour
         defaultPosition = rectTransform.anchoredPosition;
     }
 
-    public void Open()
+    public void Open(int currentScore, int highestScore)
     {
-        rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
-    }
+        currentScoreText.text = currentScore.ToString();
+        highestScoreText.text = highestScore.ToString();
 
-    public void SetScoreText(string text)
-    {
-        scoreText.text = text;
+        rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
     }
 
     public void Close()

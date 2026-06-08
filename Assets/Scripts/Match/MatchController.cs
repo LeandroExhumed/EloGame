@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SpaceChaos.Utils;
+using System;
 using UnityEngine;
 
 namespace DefaultCompany.Match
 {
     public class MatchController : IDisposable
     {
+        private const string HIGH_SCORE_DATA = "high_score.dat";
         private int lastSecondRegistered;
 
         private readonly MatchModel model;
@@ -25,10 +27,27 @@ namespace DefaultCompany.Match
             model.OnRestart += HandleRestart;
         }
 
-        private void HandleGameOver()
+        private void HandleGameOver(int currentScore)
         {
             view.SetGameplayUIActive(false);
-            view.OpenGameOverPanel();
+
+            int bestScoreSaved = DataService.load<int>(HIGH_SCORE_DATA);
+
+            if (bestScoreSaved != 0)
+            {
+                if (currentScore > bestScoreSaved)
+                {
+                    DataService.save(HIGH_SCORE_DATA, currentScore);
+                    bestScoreSaved = currentScore;
+                }
+            }
+            else
+            {
+                DataService.save(HIGH_SCORE_DATA, currentScore);
+                bestScoreSaved = currentScore;
+            }
+
+            view.OpenGameOverPanel(currentScore, bestScoreSaved);
         }
 
         private void HandleScoreChanged(int currentScore)
