@@ -6,6 +6,7 @@ namespace DefaultCompany.Player
     public class Health : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
+        public event Action OnDamageTaken;
         public event Action<bool> OnDied;
 
         public int CurrentHealth
@@ -34,6 +35,10 @@ namespace DefaultCompany.Player
             if (CurrentHealth == 0)
             {
                 OnDied?.Invoke(false);
+            }
+            else
+            {
+                OnDamageTaken?.Invoke();
             }
         }
 

@@ -6,6 +6,7 @@ namespace DefaultCompany.Enemy
     public class Health : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
+        public event Action OnDamageTaken;
         public event Action<bool> OnDied;
 
         public int CurrentHealth
@@ -39,6 +40,10 @@ namespace DefaultCompany.Enemy
             {
                 collider.enabled = false;
                 OnDied?.Invoke(forced);
+            }
+            else
+            {
+                OnDamageTaken?.Invoke();
             }
         }
 

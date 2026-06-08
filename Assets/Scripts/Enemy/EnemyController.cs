@@ -17,17 +17,14 @@ namespace DefaultCompany.Enemy
 
         public void Initialize()
         {
-            health.OnHealthChanged += HandleHealthChanged;
+            health.OnDamageTaken += HandleDamageTaken;
             health.OnDied += HandleDied;
         }
 
-        private void HandleHealthChanged(int currentHealth, int _)
+        private void HandleDamageTaken()
         {
-            if (currentHealth > 0)
-            {
-                view.PlayPulseEffect(false);
-                view.PlayDamageSound();
-            }
+            view.PlayPulseEffect(false);
+            view.PlayDamageSound();
         }
 
         private void HandleDied(bool forced)
@@ -45,8 +42,8 @@ namespace DefaultCompany.Enemy
 
         public void Dispose()
         {
+            health.OnDamageTaken -= HandleDamageTaken;
             health.OnDied -= HandleDied;
-            health.OnHealthChanged -= HandleHealthChanged;
         }
     }
 }

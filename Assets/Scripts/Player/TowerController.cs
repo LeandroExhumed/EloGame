@@ -18,16 +18,18 @@ namespace DefaultCompany.Player
         public void Initialize()
         {
             health.OnHealthChanged += HandleHealthChanged;
+            health.OnDamageTaken += HandleDamageTaken;
             health.OnDied += HandleDied;
+        }
+
+        private void HandleDamageTaken()
+        {
+            view.PlayPulseEffect();
+            view.PlayDamageSound();
         }
 
         private void HandleHealthChanged(int currentHealth, int maxHealth)
         {
-            if (currentHealth > 0)
-            {
-                view.PlayPulseEffect();
-                view.PlayDamageSound();
-            }
             view.SetHealthGauge(currentHealth, maxHealth);
         }
 
@@ -40,6 +42,7 @@ namespace DefaultCompany.Player
         public void Dispose()
         {
             health.OnHealthChanged -= HandleHealthChanged;
+            health.OnDamageTaken -= HandleDamageTaken;
             health.OnDied -= HandleDied;
         }
     }

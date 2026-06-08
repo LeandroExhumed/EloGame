@@ -12,6 +12,11 @@ namespace DefaultCompany.Enemy
             add => health.OnHealthChanged += value;
             remove => health.OnHealthChanged -= value;
         }
+        public event Action OnDamageTaken
+        {
+            add => health.OnDamageTaken += value;
+            remove => health.OnDamageTaken -= value;
+        }
         public event Action<bool> OnDied
         {
             add => health.OnDied += value;
