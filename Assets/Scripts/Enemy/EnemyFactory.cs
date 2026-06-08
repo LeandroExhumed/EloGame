@@ -13,7 +13,7 @@ namespace DefaultCompany.Enemy
         {
             int index = Random.Range(0, spawnPoints.Length);
             Vector3 position = spawnPoints[index].position;
-            position.y = Random.Range(0, 0.1f);
+            position.y += Random.Range(0, 0.08f);
             return Instantiate(enemyPrefab, position, Quaternion.identity, transform);
         }
     }
