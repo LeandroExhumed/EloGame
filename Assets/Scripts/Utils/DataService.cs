@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace SpaceChaos.Utils {
+namespace DefaultCompany.Utils {
     /// <summary>
     /// Save/Load services for binary files.
     /// </summary>
@@ -13,7 +13,8 @@ namespace SpaceChaos.Utils {
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <param name="data">The data.</param>
-        public static void save (string fileName, object data) {
+        public static void Save(string fileName, object data)
+        {
             //"/save.dat"
             string destination = Path.Combine(Application.persistentDataPath, fileName);
             FileStream file;
@@ -24,7 +25,7 @@ namespace SpaceChaos.Utils {
                 file = File.Create(destination);
             }
 
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter bf = new();
             bf.Serialize(file, data);
             file.Close();
         }
@@ -35,7 +36,8 @@ namespace SpaceChaos.Utils {
         /// <typeparam name="T"></typeparam>
         /// <param name="fileName">Name of the file.</param>
         /// <returns></returns>
-        public static T load<T> (string fileName) {
+        public static T Load<T>(string fileName)
+        {
             string destination = Path.Combine(Application.persistentDataPath, fileName);
             FileStream file;
 
@@ -46,7 +48,7 @@ namespace SpaceChaos.Utils {
                 return default(T);
             }
 
-            BinaryFormatter bf = new BinaryFormatter();
+            BinaryFormatter bf = new();
             T data = (T)bf.Deserialize(file);
             file.Close();
 

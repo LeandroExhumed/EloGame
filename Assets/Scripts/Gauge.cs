@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultCompany.UI
+namespace DefaultCompany.Utils
 {
     public class Gauge : MonoBehaviour
     {

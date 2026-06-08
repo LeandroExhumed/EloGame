@@ -2,37 +2,40 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class GameOverPanel : MonoBehaviour
+namespace DefaultCompany
 {
-    [SerializeField]
-    private RectTransform rectTransform;
-    [SerializeField]
-    private Vector2 finalPosition;
-    [SerializeField]
-    private TextMeshProUGUI currentScoreText;
-    [SerializeField]
-    private TextMeshProUGUI highestScoreText;
-
-    [SerializeField]
-    private float duration = 1f;
-
-    private Vector2 defaultPosition;
-
-    private void Awake()
+    public class GameOverPanel : MonoBehaviour
     {
-        defaultPosition = rectTransform.anchoredPosition;
-    }
+        [SerializeField]
+        private RectTransform rectTransform;
+        [SerializeField]
+        private Vector2 finalPosition;
+        [SerializeField]
+        private TextMeshProUGUI currentScoreText;
+        [SerializeField]
+        private TextMeshProUGUI highestScoreText;
 
-    public void Open(int currentScore, int highestScore)
-    {
-        currentScoreText.text = currentScore.ToString();
-        highestScoreText.text = highestScore.ToString();
+        [SerializeField]
+        private float duration = 1f;
 
-        rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
-    }
+        private Vector2 defaultPosition;
 
-    public void Close()
-    {
-        rectTransform.DOAnchorPos(defaultPosition, duration);
+        private void Awake()
+        {
+            defaultPosition = rectTransform.anchoredPosition;
+        }
+
+        public void Open(int currentScore, int highestScore)
+        {
+            currentScoreText.text = currentScore.ToString();
+            highestScoreText.text = highestScore.ToString();
+
+            rectTransform.DOAnchorPos(finalPosition, duration).SetEase(Ease.OutBounce);
+        }
+
+        public void Close()
+        {
+            rectTransform.DOAnchorPos(defaultPosition, duration);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DefaultCompany.Enemy;
+using DefaultCompany.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

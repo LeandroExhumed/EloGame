@@ -1,4 +1,4 @@
-﻿using DefaultCompany.UI;
+﻿using DefaultCompany.Utils;
 using DG.Tweening;
 using UnityEngine;
 

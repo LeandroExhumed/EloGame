@@ -1,5 +1,4 @@
-﻿using SpaceChaos.Utils;
-using System;
+﻿using DefaultCompany.Utils;
 using UnityEngine;
 
 namespace DefaultCompany.Match
@@ -31,19 +30,19 @@ namespace DefaultCompany.Match
         {
             view.SetGameplayUIActive(false);
 
-            int bestScoreSaved = DataService.load<int>(HIGH_SCORE_DATA);
+            int bestScoreSaved = DataService.Load<int>(HIGH_SCORE_DATA);
 
             if (bestScoreSaved != 0)
             {
                 if (currentScore > bestScoreSaved)
                 {
-                    DataService.save(HIGH_SCORE_DATA, currentScore);
+                    DataService.Save(HIGH_SCORE_DATA, currentScore);
                     bestScoreSaved = currentScore;
                 }
             }
             else
             {
-                DataService.save(HIGH_SCORE_DATA, currentScore);
+                DataService.Save(HIGH_SCORE_DATA, currentScore);
                 bestScoreSaved = currentScore;
             }
 

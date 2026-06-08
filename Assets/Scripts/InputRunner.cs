@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
-namespace DefaultCompany
+namespace DefaultCompany.Player
 {
     public class InputRunner : ITickable
     {
