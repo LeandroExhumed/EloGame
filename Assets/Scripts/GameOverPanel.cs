@@ -18,7 +18,7 @@ public class GameOverPanel : MonoBehaviour
 
     private void Awake()
     {
-        defaultPosition = rectTransform.position;
+        defaultPosition = rectTransform.anchoredPosition;
     }
 
     public void Open()
