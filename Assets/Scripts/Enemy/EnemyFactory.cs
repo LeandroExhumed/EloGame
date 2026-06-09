@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultCompany.Utils.Pooling;
+using UnityEngine;
 
 namespace DefaultCompany.Enemy
 {
@@ -8,13 +9,27 @@ namespace DefaultCompany.Enemy
         private EnemyFacade enemyPrefab;
         [SerializeField]
         private Transform[] spawnPoints;
+        [SerializeField]
+        private int poolSize = 30;
+
+        private IPool pool;
+
+        private void Awake()
+        {
+            pool = new Pool();
+            pool.AddPool(enemyPrefab, poolSize, transform);
+        }
 
         public EnemyFacade GetEnemy()
         {
             int index = Random.Range(0, spawnPoints.Length);
             Vector3 position = spawnPoints[index].position;
             position.y += Random.Range(0, 0.08f);
-            return Instantiate(enemyPrefab, position, Quaternion.identity, transform);
+
+            EnemyFacade enemy = pool.GetObject<EnemyFacade>(enemyPrefab);
+            enemy.transform.SetPositionAndRotation(position,Quaternion.identity);
+
+            return enemy;
         }
     }
 }

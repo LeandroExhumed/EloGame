@@ -1,11 +1,12 @@
 ﻿using Assets.Scripts.Enemy;
 using DefaultCompany.Player;
+using DefaultCompany.Utils.Pooling;
 using System;
 using UnityEngine;
 
 namespace DefaultCompany.Enemy
 {
-    public class EnemyFacade : MonoBehaviour, IDamageable
+    public class EnemyFacade : MonoBehaviour, IDamageable, IPoolable
     {
         public event Action<int, int> OnHealthChanged
         {
@@ -50,6 +51,8 @@ namespace DefaultCompany.Enemy
         public void TakeDamage(int damage) => health.TakeDamage(damage);
 
         public void Restart() => health.Restart();
+
+        public void Reuse() => Restart();
 
         private void OnDestroy()
         {

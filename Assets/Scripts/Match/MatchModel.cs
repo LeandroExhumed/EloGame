@@ -32,7 +32,7 @@ namespace DefaultCompany.Match
             }
         }
 
-        private MatchData data;
+        private readonly MatchData data;
 
         private bool isOver = false;
 
@@ -106,8 +106,11 @@ namespace DefaultCompany.Match
         private void SpawnEnemy()
         {
             EnemyFacade enemy = enemyFactory.GetEnemy();
-            enemies.Add(enemy);
-            enemy.OnDied += HandleEnemyDied;
+            if (!enemies.Contains(enemy))
+            {
+                enemies.Add(enemy);
+                enemy.OnDied += HandleEnemyDied;
+            }
         }
 
         private void FinishGame()
