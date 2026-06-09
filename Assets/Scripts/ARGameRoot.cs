@@ -6,7 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 
 namespace DefaultCompany
 {
-    public class Spawner : MonoBehaviour
+    public class ARGameRoot : MonoBehaviour
     {
         [SerializeField]
         private ARTrackedImageManager imageManager;
@@ -21,10 +21,6 @@ namespace DefaultCompany
         [SerializeField]
         private TextMeshProUGUI resultText;
 
-        private GameObject arObject;
-        private GameObject nonARObject;
-
-
         private void OnEnable()
         {
             imageManager.trackablesChanged.AddListener(OnImageChanged);
@@ -34,7 +30,7 @@ namespace DefaultCompany
         {
             foreach (var trackedImage in eventArgs.added)
             {
-                arObject = Instantiate(arObjectPrefab, trackedImage.transform);
+                Instantiate(arObjectPrefab, trackedImage.transform);
                 StartCoroutine(SpawnNonARObjectDelayed());
                 trackText.text = $"Image detected for the first time: {trackedImage.referenceImage.name}";
                 UpdateTrackingStatus(trackedImage);
@@ -45,7 +41,7 @@ namespace DefaultCompany
                 UpdateTrackingStatus(trackedImage);
             }
 
-            foreach (var trackedImage in eventArgs.removed)
+            foreach (var _ in eventArgs.removed)
             {
                 trackText.text = $"Image tracking reference removed completely";
             }
@@ -53,27 +49,27 @@ namespace DefaultCompany
 
         private void UpdateTrackingStatus(ARTrackedImage trackedImage)
         {
-            // Check the specific tracking health from ARCore
+            string text = "";
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
-                resultText.text = $"{trackedImage.referenceImage.name} is currently actively tracked and visible.";
-                // Your custom logic: E.g., enable your 3D prefab, play a sound
+                text = $"{trackedImage.referenceImage.name} is currently actively tracked and visible.";
             }
             else if (trackedImage.trackingState == TrackingState.Limited)
             {
-                resultText.text = $"{trackedImage.referenceImage.name} has limited tracking (out of view or obscured).";
-                // Your custom logic: E.g., hide the 3D visual elements
+                text = $"{trackedImage.referenceImage.name} has limited tracking (out of view or obscured).";
             }
             else
             {
-                resultText.text = "None";
+                text = "None";
             }
+
+            resultText.text = text;
         }
 
         private IEnumerator SpawnNonARObjectDelayed()
         {
             yield return new WaitForEndOfFrame();
-            nonARObject = Instantiate(nonARObjectPrefab);
+            Instantiate(nonARObjectPrefab);
         }
     }
 }
