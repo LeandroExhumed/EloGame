@@ -4,7 +4,7 @@ Tower Defense em AR feito na Unity.
 ## AR Foundation
 Optei por usar o AR Foundation não só por ser gratuito e por ser o framework oficial da Unity mas também por ser novo para mim. Já havia trabalhado com Vuforia e EasyAR anteriormente e gostaria de testar uma ferramenta nova, principalmente se tratando de uma já "mais integrada" com a Unity.
 
-##Ferramentas
+## Ferramentas
 - Unity 6.3 LTS (6000.3.10f1)
 - AR Foundation 6.3.5
 
