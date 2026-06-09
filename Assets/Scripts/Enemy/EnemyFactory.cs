@@ -28,6 +28,7 @@ namespace DefaultCompany.Enemy
 
             EnemyFacade enemy = pool.GetObject<EnemyFacade>(enemyPrefab);
             enemy.transform.SetPositionAndRotation(position,Quaternion.identity);
+            enemy.Initialize();
 
             return enemy;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Player
 {
-    public class Health : IDamageable
+    public class HealthModel : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
         public event Action OnDamageTaken;
@@ -22,7 +22,7 @@ namespace DefaultCompany.Player
         private readonly int maxHealth;
         private int currentHealth;
 
-        public Health(int maxHealth)
+        public HealthModel(int maxHealth)
         {
             this.maxHealth = maxHealth;
             CurrentHealth = maxHealth;

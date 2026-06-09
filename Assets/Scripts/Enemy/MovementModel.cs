@@ -2,28 +2,40 @@
 
 namespace DefaultCompany.Enemy
 {
-    public class Movement : ITickable
+    public class MovementModel : IMovement
     {
         private readonly EnemyData data;
+
+        private bool canMove = false;
         private float cooldownCounter = 0f;
 
         private readonly Transform transform;
 
-        private const int TARGET_LAYERMASK = 1 << 6;
         private readonly Transform target;
-        private readonly Vector3 targetPosition;
+        private Vector3 targetPosition;
 
-        public Movement(EnemyData data, Transform transform, Transform target)
+        public MovementModel(EnemyData data, Transform transform, Transform target)
         {
             this.data= data;
             this.transform = transform;
             this.target = target;
+        }
+
+        public void Initialize()
+        {
             targetPosition = target.position;
             targetPosition.y += Random.Range(-0.03f, 0.03f);
+
+            canMove = true;
         }
 
         public void Tick()
         {
+            if (!canMove)
+            {
+                return;
+            }
+
             if (Vector3.Distance(transform.position, targetPosition) >= data.DistanceToAttack)
             {
                 Vector3 direction = (targetPosition - transform.position).normalized;

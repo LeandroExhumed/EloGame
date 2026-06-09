@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Enemy
 {
-    public class Health : IDamageable
+    public class HealthModel : IDamageable
     {
         public event Action<int, int> OnHealthChanged;
         public event Action OnDamageTaken;
@@ -24,7 +24,7 @@ namespace DefaultCompany.Enemy
 
         private readonly Collider collider;
 
-        public Health(int maxHealth, Collider collider)
+        public HealthModel(int maxHealth, Collider collider)
         {
             this.maxHealth = maxHealth;
             CurrentHealth = maxHealth;

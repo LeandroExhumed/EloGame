@@ -31,7 +31,7 @@ namespace DefaultCompany.Player
 
         private void Awake()
         {
-            health = new Health(data.TowerHealth);
+            health = new HealthModel(data.TowerHealth);
             controller = new TowerController(health, GetComponent<TowerView>());
 
             controller.Initialize();

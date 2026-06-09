@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DefaultCompany.Enemy
 {
-    public class EnemyFacade : MonoBehaviour, IDamageable, IPoolable
+    public class EnemyFacade : MonoBehaviour, IDamageable, IMovement, IPoolable
     {
         public event Action<int, int> OnHealthChanged
         {
@@ -27,7 +27,7 @@ namespace DefaultCompany.Enemy
         [SerializeField]
         private EnemyData data;
 
-        private ITickable movement;
+        private IMovement movement;
         private IDamageable health;
 
         private IController controller;
@@ -36,8 +36,8 @@ namespace DefaultCompany.Enemy
         {
             // I would use D.I here but for this game is too much.
             Transform target = FindFirstObjectByType<TowerFacade>().transform;
-            movement = new Movement(data, transform, target);
-            health = new Health(data.MaxHealth, GetComponent<Collider>());
+            movement = new MovementModel(data, transform, target);
+            health = new HealthModel(data.MaxHealth, GetComponent<Collider>());
             controller = new EnemyController(health, GetComponent<EnemyView>());
 
             controller.Initialize();
@@ -45,8 +45,12 @@ namespace DefaultCompany.Enemy
 
         private void Update()
         {
-            movement.Tick();
+            Tick();
         }
+
+        public void Initialize() => movement.Initialize();
+
+        public void Tick() => movement.Tick();
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
 
