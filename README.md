@@ -18,5 +18,8 @@ Injeção de depêndencia(uso nos meus projetos porém devido ao escopo desse jo
 - Fluxo mais complexo de inimigos(spawn por waves, intervalo dinamico entre spawns, inimigos variados, etc)
 - Mais juiciness, ou seja, implementar features que melhorassem o game feel como um todo.
 
-## Link da build:
+## Link da build e do target:
 https://drive.google.com/drive/folders/1gd78ogM--01m3RlnfW94QKrfmSSMRtGE?usp=sharing
+
+## Target
+<img width="1024" height="520" alt="image-target" src="https://github.com/user-attachments/assets/ec77a90c-03af-4bd6-a90e-74f1fb192082" />
